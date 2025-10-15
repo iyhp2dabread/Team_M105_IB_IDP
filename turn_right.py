@@ -1,4 +1,4 @@
-#Turns Left, using motors.
+#Turns right, using motors.
 from machine import Pin, PWM
 from utime import sleep
 
