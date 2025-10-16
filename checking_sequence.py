@@ -48,8 +48,8 @@ def left_checking():
             counter += 1 #slot is checked
             go_forward()
     
-    motor3.off() 
-    motor4.off()
+    motor3.off() #turns motor 3 off
+    motor4.off() #turns motor 4 off
             
 def right_checking():
     counter = 0 # for checking each crate slot
@@ -72,8 +72,8 @@ def right_checking():
             counter += 1 #slot is checked
             go_forward()
     
-    motor3.off()
-    motor4.off()
+    motor3.off() #turns motor 3 off
+    motor4.off() #turns motor 3 off
 
 if __name__ == "__main__":
     if area_counter == 0 or area_counter == 2:
