@@ -6,6 +6,7 @@ from turn_right.py import turn_right #Turns right by 90 deg
 from go_forward.py import go_forward #Increments forward
 from qr_code_scanner.py import scan_qr #scans the qr codes
 from crate_extraction.py import extract_crate #extracts crate if it exists
+from amber_led.py import amber_led #flashes the amber led
 
 
 class Motor:
@@ -32,14 +33,17 @@ def left_checking():
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
+    amber_led()
     turn_left()
     turn_left() # rotates 180 deg
     while counter < 6:
         while line_sensor_left == 0: #moves until aligned with a slot
             go_forward()
         turn_left() #turns into slots
+        scan_qr = scan_qr() #scans the qr code attempt
         if scan_qr[0] == 1: #first element states whether the qr code exist
             print("Crate is found!")
+            amber_led()
             counter = 7
             extract_crate() #crate extraction sequence
             break
@@ -56,6 +60,7 @@ def right_checking():
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
+    amber_led()
     turn_left()
     turn_left() # rotates 180 deg
     while counter < 6:
@@ -64,6 +69,7 @@ def right_checking():
         turn_right() #turns into slots
         if scan_qr[0] == 1: #first element states whether the qr code exist
             print("Crate is found!")
+            amber_led()
             counter = 7
             extract_crate() #crate extraction sequence
             break
