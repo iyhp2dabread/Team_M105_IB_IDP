@@ -1,0 +1,13 @@
+#line sensor detection for robot
+from machine import Pin
+from utime import sleep
+
+#Set the line_sensor pin for forward right
+sensor_pin = 21 # Pin 21 = GP21 (labelled 27 on the jumper)
+sensor_forward_right = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
+
+#Continiously update the sensor value and print said value
+while True:
+  sleep(0.1)
+  print(sensor_forward_right.value())
+  return sensor_forward_right.value()
