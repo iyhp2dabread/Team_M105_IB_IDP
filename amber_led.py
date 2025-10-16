@@ -11,11 +11,12 @@ def amber_led(): #turns amber LED on
     led_red = Pin(led_red_pin, Pin.OUT)
 
     print("Amber LED ON")
-    led_amber.value(1)
     led_red.value(0)
-    sleep(5)
-    led_amber.value(0)
-    print("test complete")
+    while True:
+        led_amber.value(1)
+        sleep(0.5)
+        led_amber.value(0)
+        sleep(0.5)
 
 if __name__ == "__main__":
     amber_led()
