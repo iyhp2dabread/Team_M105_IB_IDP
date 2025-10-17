@@ -7,7 +7,12 @@ sensor_pin = 10 # Pin 10 = GP10 (labelled 14 on the jumper)
 sensor_left = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
 
 #Continiously update the sensor value and print said value
-while True:
-  sleep(0.1)
-  print(sensor_left.value())
-  return sensor_left.value()
+def left_sensor():
+    print("Sequence Left Active")
+    while True:
+      sleep(0.1)
+      print(sensor_left.value())
+      return sensor_left.value()
+
+if __name__ == "__main__":
+    left_sensor()
