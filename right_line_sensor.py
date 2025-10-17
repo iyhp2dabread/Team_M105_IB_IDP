@@ -4,7 +4,7 @@ from utime import sleep
 
 #Set the line_sensor pin for right
 sensor_pin = 11 # Pin 11 = GP11 (labelled 15 on the jumper)
-sensor_left = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
+sensor_right = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
 
 #Continiously update the sensor value and print said value
 def right_sensor():
