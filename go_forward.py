@@ -1,6 +1,8 @@
+
 #Goes forward, using motors.
 from machine import Pin, PWM
 from utime import sleep
+from refind_line import refind_line
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
@@ -21,17 +23,63 @@ class Motor:
         self.pwm.duty_u16(int(65535 * speed / 100))
 
 
+def go_forward():   
+    print("Go forward")
+    while new_detection = False:
+        if line_sensor_left == 1 or line_sensor_right == 1:  #If a junction/corner is reached, stop moving forward
+            new_detection = True
+            motor3.off()
+            motor4.off()
+            break
+        else:
+            while line_sensor_front_left == 1: and line_sensor_front_right == 1:
+                motor3.Forward()
+                motor4.Forward()
+                sleep(1)
+            if line_sensor_front_left == 0 and line_sensor_front_right == 1:
+                motor3.off()
+                motor4.Forward() # Puts power through right motor only to make small correction
+            if line_sensor_front_left == 1 and line_sensor_front_right == 0:
+                motor4.off()
+                motor3.Forward() # Puts power through left motor only to make small correction
+            else:
+                motor3.off()
+                motor4.off()
+                refind_line()     # Robot has come of line completely and must refind it 
+            
 def go_forward(t):
-    motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
-    motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
-    
-    print("Go Forward")
-    motor3.Forward()
-    motor4.Forward()
-    sleep(t)
-    
-    motor3.off() #Stops Motor 3
-    motor4.off() #Stops Motor 4
+    print("Go forward")
+    while new_detection = False:
+        if line_sensor_left == 1 or line_sensor_right == 1:  #If a junction/corner is reached, stop moving forward
+            new_detection = True
+            motor3.off()
+            motor4.off()
+            break
+        else:
+            while line_sensor_front_left == 1: and line_sensor_front_right == 1:
+                motor3.Forward()
+                motor4.Forward()
+                sleep(t)
+                motor3.off()
+                motor4.off()
+            if line_sensor_front_left == 0 and line_sensor_front_right == 1:
+                motor3.off()
+                motor4.Forward()
+                sleep(t)# Puts power through right motor only to make small correction
+                motor4.off()
+            if line_sensor_front_left == 1 and line_sensor_front_right == 0:
+                motor4.off()
+                motor3.Forward() # Puts power through left motor only to make small correction
+                sleep(t)
+                motor3.off()
+            else:
+                motor3.off()
+                motor4.off()
+                refind_line()     # Robot has come of line completely and must refind it 
 
 if __name__ == "__main__":
     go_forward(1)
+        
+
+
+
