@@ -2,7 +2,7 @@
 #Goes forward, using motors.
 from machine import Pin, PWM
 from utime import sleep
-from refind_line import refind_line
+#from refind_line import refind_line
 from forward_right_line_sensor.py import forward_right_sensor
 from forward_left_line_sensor.py import forward_left_sensor
 from left_line_sensor.py import left_sensor
@@ -30,6 +30,10 @@ class Motor:
             
 def go_forward(t1, t2):
     print("Go forward")
+    if left_sensor() == 0 and right_sensor() == 0:  #If a junction/corner is reached, stop moving forward
+        new_detection = False
+    else:
+        new_detection = True
     while new_detection == False:
         if left_sensor() == 1 or right_sensor() == 1:  #If a junction/corner is reached, stop moving forward
             new_detection = True
@@ -53,10 +57,10 @@ def go_forward(t1, t2):
                 motor3.Forward() # Puts power through left motor only to make small correction
                 sleep(t2)
                 motor3.off()
-            else:
-                motor3.off()
-                motor4.off()
-                refind_line()     # Robot has come of line completely and must refind it 
+           # else:
+           #     motor3.off()
+           #     motor4.off()
+            #    refind_line()     # Robot has come of line completely and must refind it 
 
 if __name__ == "__main__":
     go_forward(1, 1)
