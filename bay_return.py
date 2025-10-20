@@ -44,7 +44,7 @@ def bay_return(bay):     #starts assuming orientation is already pointing toward
             go_to_bay_exit()
     if bay == 2:          #goes to bay 2 and drops box
         turn_right(1)
-        for i in range(3)
+        for i in range(3):
             go_forward(1)
         turn_left(1)
         go_forward(1)
@@ -53,7 +53,7 @@ def bay_return(bay):     #starts assuming orientation is already pointing toward
             go_to_bay_exit()
     if bay == 1:          #goes to bay 1 and drops boxs
         turn_right(1)
-        for i in range(4)
+        for i in range(4):
             go_forward(1)
         turn_left(1)
         go_forward(1)
