@@ -3,7 +3,7 @@ from machine import Pin
 from utime import sleep
 
 #Set the line_sensor pin for forward right
-sensor_pin = 21 # Pin 21 = GP21 (labelled 27 on the jumper)
+sensor_pin = 20 # Pin 20 = GP20 (labelled 26 on the jumper)
 sensor_forward_right = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
 
 #Continiously update the sensor value and print said value
