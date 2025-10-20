@@ -58,8 +58,7 @@ def bay_return(bay):     #starts assuming orientation is already pointing toward
         turn_left(1)
         go_forward(1)
         drop_item()
-        if item_counter == 1:
-            go_to_bay_exit()
+
             
 def go_to_bay_exit():
     turn_right(1)
