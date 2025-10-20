@@ -81,8 +81,11 @@ def right_checking():
     motor3.off() #turns motor 3 off
     motor4.off() #turns motor 3 off
 
-if __name__ == "__main__":
+def checking_sequence(area_counter):
     if area_counter == 0 or area_counter == 2:
         left_checking()
     if area_counter == 1 or area_counter == 3:
         right_checking()
+
+if __name__ == "__main__":
+    checking_sequence(area_counter)
