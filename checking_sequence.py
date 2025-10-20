@@ -88,4 +88,4 @@ def checking_sequence(area_counter):
         right_checking()
 
 if __name__ == "__main__":
-    checking_sequence(area_counter)
+    checking_sequence(0)
