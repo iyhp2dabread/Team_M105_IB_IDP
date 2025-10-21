@@ -9,7 +9,7 @@ from right_line_sensor import right_sensor
 
 from placement_right.py import place_right
 
-def go_to_area3():
+def go_to_area3(index):
     left_sense = left_sensor()
     right_sense = right_sensor()
     turn_left(1)
@@ -33,5 +33,5 @@ def go_to_area3():
         go_forward(0.2)
         left_sense = left_sensor()
         right_sense = right_sensor()
-    place_right()
+    place_right(index)
 
