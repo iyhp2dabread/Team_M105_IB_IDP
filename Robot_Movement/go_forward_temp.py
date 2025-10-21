@@ -28,7 +28,7 @@ class Motor:
 
 
             
-def go_forward(t1, t2):
+def go_forward(t):
     print("Go forward")
     if left_sensor() == 0 and right_sensor() == 0:  #If a junction/corner is reached, stop moving forward
         new_detection = False
@@ -50,12 +50,12 @@ def go_forward(t1, t2):
             if forward_left_sensor() == 0 and forward_right_sensor() == 1:
                 motor3.off()
                 motor4.Forward()
-                sleep(t2)# Puts power through right motor only to make small correction
+                sleep(t)# Puts power through right motor only to make small correction
                 motor4.off()
             if forward_left_sensor() == 1 and forward_right_sensor() == 0:
                 motor4.off()
                 motor3.Forward() # Puts power through left motor only to make small correction
-                sleep(t2)
+                sleep(t)
                 motor3.off()
            # else:
            #     motor3.off()
