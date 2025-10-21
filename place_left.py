@@ -6,6 +6,7 @@ from turn_left.py import turn_left #Turns left by 90 deg
 from turn_right.py import turn_right #Turns right by 90 deg
 from go_forward.py import go_forward #Increments forward
 from drop_crate.py import drop_crate #Moves forward, drops crate, returns back
+from left_line_sensor.py import left_sensor #Checks the left sensor
 
 
 class Motor:
