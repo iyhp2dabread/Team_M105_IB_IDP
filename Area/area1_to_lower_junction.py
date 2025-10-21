@@ -9,7 +9,7 @@ from lower_junction_to_bay_entrance import lower_junction_to_bay_entrance
 
 from placement_right.py import place_right
 
-def area1_to_bay():
+def area1_to_lj():
     left_sense = left_sensor()
     right_sense = right_sensor()
     
