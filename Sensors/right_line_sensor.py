@@ -12,7 +12,6 @@ def right_sensor():
     while True:
       sleep(0.1)
       print(sensor_right.value())
-      return sensor_right.value()
 
 if __name__ == "__main__":
     right_sensor()
