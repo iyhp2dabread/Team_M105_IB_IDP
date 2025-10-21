@@ -2,12 +2,12 @@
 from machine import Pin, PWM
 from utime import sleep
 
-from turn_left.py import turn_left
-from turn_right.py import turn_right
+from turn_left import turn_left
+from turn_right import turn_right
 from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
 
-from placement_left.py import place_left
+from placement_left import place_left
 
 def go_to_area2(index):
     left_sense = left_sensor()
