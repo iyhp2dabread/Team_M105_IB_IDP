@@ -2,10 +2,10 @@
 from machine import Pin, PWM
 from utime import sleep
 
-from turn_left.py import turn_left #Turns left by 90 deg
-from turn_right.py import turn_right #Turns right by 90 deg
-from left_line_sensor.py import left_sensor #Check lines to the left
-from right_line_sensor.py import right_sensor #Check lines to the right
+from turn_left import turn_left #Turns left by 90 deg
+from turn_right import turn_right #Turns right by 90 deg
+from left_line_sensor import left_sensor #Check lines to the left
+from right_line_sensor import right_sensor #Check lines to the right
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
