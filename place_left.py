@@ -31,8 +31,7 @@ def place_left(index):
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
-    turn_left()
-    turn_left() # rotates 180 deg
+    turn_left(2) # rotates 180 deg
     go_forward(0.1) # get off checkpoint part
     counter = 0
     while counter < index:
@@ -41,7 +40,7 @@ def place_left(index):
         if left_sense == 1:
             counter += 1
     
-    turn_left() #turn into bay
+    turn_left(1) #turn into bay
     drop_crate()
     
     motor3.off() #turns motor 3 off
