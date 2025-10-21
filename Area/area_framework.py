@@ -14,20 +14,20 @@ def area_code(Rack, Level):
     if Rack == "Rack A" and Level == "Lower":
         return 4
 
-def get_to_area(area):
+def get_to_area(area, index):
     if area == 1:
-        go_to_area1() #goes to Purple lower
+        go_to_area1(index) #goes to Purple lower
     elif area == 2:
         bay_exit_to_lower_junction() #goes to lower junction
-        go_to_area2() #goes to Purple upper
+        go_to_area2(index) #goes to Purple upper
     elif area == 3:
         bay_exit_to_lower_junction() #goes to lower junction
-        go_to_area3() #goes to Orange upper
+        go_to_area3(index) #goes to Orange upper
     elif area == 4:
         bay_exit_to_lower_junction() #goes to lower junction
-        go_to_area4() #goes to Orange lower
+        go_to_area4(index) #goes to Orange lower
 
 if __name__ == "__main__":
     area = area_code(scaner_info[0], scanner_info[1])
-    go_to_area(area)
+    go_to_area(area, scanner_info[2])
         
