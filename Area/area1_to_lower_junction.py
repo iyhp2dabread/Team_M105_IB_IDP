@@ -7,8 +7,6 @@ from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
 from lower_junction_to_bay_entrance import lower_junction_to_bay_entrance
 
-from placement_right.py import place_right
-
 def area1_to_lj():
     left_sense = left_sensor()
     right_sense = right_sensor()
