@@ -16,16 +16,16 @@ def area_code(Rack, Level):
 
 def get_to_area(area):
     if area == 1:
-        go_to_area1()
+        go_to_area1() #goes to Purple lower
     elif area == 2:
-        lower_junction()
-        go_to_area2()
+        bay_exit_to_lower_junction() #goes to lower junction
+        go_to_area2() #goes to Purple upper
     elif area == 3:
-        lower_junction()
-        go_to_area3()
+        bay_exit_to_lower_junction() #goes to lower junction
+        go_to_area3() #goes to Orange upper
     elif area == 4:
-        lower_junction()
-        go_to_area4()
+        bay_exit_to_lower_junction() #goes to lower junction
+        go_to_area4() #goes to Orange lower
 
 if __name__ == "__main__":
     area = area_code(scaner_info[0], scanner_info[1])
