@@ -3,7 +3,7 @@
 #Starts at Bay exit facing north
 from machine import Pin, PWM
 from utime import sleep
-from backing_up_rack.py import backing_up
+from backing_up_rack import backing_up
 
 def area_code(Rack, Level):
     if Rack == "Rack B" and Level == "Lower":
