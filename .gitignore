@@ -1,1 +1,3 @@
 .venv
+#also changed the import functions to the same without the .py
+#not sure if this changes a lot but we see later if it crashes
