@@ -29,6 +29,10 @@ class Motor:
 
             
 def go_forward(t):
+
+    motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
+    motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
+    
     print("Go forward")
     if left_sensor() == 0 and right_sensor() == 0:  #If a junction/corner is reached, stop moving forward
         new_detection = False
@@ -44,7 +48,7 @@ def go_forward(t):
             while forward_left_sensor() == 1 and forward_right_sensor() == 1:
                 motor3.Forward()
                 motor4.Forward()
-                sleep(t1)
+                sleep(t)
                 motor3.off()
                 motor4.off()
             if forward_left_sensor() == 0 and forward_right_sensor() == 1:
@@ -63,7 +67,7 @@ def go_forward(t):
             #    refind_line()     # Robot has come of line completely and must refind it 
 
 if __name__ == "__main__":
-    go_forward(1, 1)
+    go_forward(1)
         
 
 
