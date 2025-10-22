@@ -11,7 +11,7 @@ def left_sensor():
     print("Sequence Left Active")
     while True:
       sleep(0.1)
-      print(sensor_left.value())
+      return sensor_left.value()
 
 if __name__ == "__main__":
     left_sensor()
