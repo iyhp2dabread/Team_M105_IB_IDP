@@ -16,7 +16,7 @@ class Motor:
     def off(self):
         self.pwm.duty_u16(0)
         
-    def Forward(self, speed=80):
+    def Forward(self, speed=50):
         self.mDir.value(0)                     # forward = 0 reverse = 1 motor
         self.pwm.duty_u16(int(65535 * speed / 100))  # speed range 0-100 motor
 
@@ -31,23 +31,26 @@ def go_forward(t):
     
     for_left_sense = forward_left_sensor()
     for_right_sense = forward_right_sensor()
-    if for_left_sense == 1 and for_right_sense == 0:
-        turn_left(0.15)
-    if for_left_sense == 0 and for_right_sense == 1:
-        turn_right(0.15)
     if for_left_sense == 0 and for_right_sense == 0:
         print("something wrong")
         motor3.off()
         motor4.off()
+        #correction here
+    else:
+        if for_left_sense == 1 and for_right_sense == 0:
+            print("Correcting to the left")
+            turn_left(0.1)
+        if for_left_sense == 0 and for_right_sense == 1:
+            print("Correcting to the right")
+            turn_right(0.1)
+        print("Go Forward")
+        
+        motor4.Forward()
+        motor3.Forward()
+        sleep(t)
     
-    print("Go Forward")
-    
-    motor4.Forward()
-    motor3.Forward()
-    sleep(t)
-    
-    motor3.off() #Stops Motor 3
-    motor4.off() #Stops Motor 4
+  #  motor3.off() #Stops Motor 3
+   # motor4.off() #Stops Motor 4
 
 if __name__ == "__main__":
     go_forward(1)
