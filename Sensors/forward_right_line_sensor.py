@@ -11,7 +11,7 @@ def forward_right_sensor():
     print("Sequence Forward Right Active")
     while True:
       sleep(0.1)
-      print(sensor_forward_right.value())
+      return sensor_forward_right.value()
 
 if __name__ == "__main__":
     forward_right_sensor()
