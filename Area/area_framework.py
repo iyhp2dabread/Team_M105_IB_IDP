@@ -4,16 +4,7 @@
 from machine import Pin, PWM
 from utime import sleep
 from backing_up_rack import backing_up
-
-def area_code(Rack, Level):
-    if Rack == "Rack B" and Level == "Lower":
-        return 1
-    if Rack == "Rack B" and Level == "Upper":
-        return 2
-    if Rack == "Rack A" and Level == "Upper":
-        return 3
-    if Rack == "Rack A" and Level == "Lower":
-        return 4
+from qr_code_scan import scan_qr
 
 def get_to_area(area, index):
     if area == 1:
@@ -33,6 +24,6 @@ def get_to_area(area, index):
         backing_up()
 
 if __name__ == "__main__":
-    area = area_code(scaner_info[0], scanner_info[1])
-    go_to_area(area, scanner_info[2])
+    area, index = scan_qr()
+    go_to_area(area, index)
         
