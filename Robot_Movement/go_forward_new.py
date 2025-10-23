@@ -5,6 +5,7 @@ from forward_left_line_sensor import forward_left_sensor
 from forward_right_line_sensor import forward_right_sensor
 from turn_left import turn_left
 from turn_right import turn_right
+from auto_correct import auto_correct
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
@@ -32,7 +33,7 @@ def go_forward(t):
     for_left_sense = forward_left_sensor()
     for_right_sense = forward_right_sensor()
     if for_left_sense == 0 and for_right_sense == 0:
-        print("something wrong")
+        auto_correct()
         motor3.off()
         motor4.off()
         #correction here
