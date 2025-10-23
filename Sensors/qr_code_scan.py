@@ -40,6 +40,7 @@ def scan_qr():
         if code is not None:
             area = area_code(code[0], code[1])
             print(f"Code found: {code}")
+            print(area, code[2])
             return area, code[2]
 
 
