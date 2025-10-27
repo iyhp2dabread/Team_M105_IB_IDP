@@ -13,7 +13,7 @@ from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
 
 
-def lower_junction_to_bay_entrance():
+def lj_to_be():
     go_forward(1)
     turn_left(1)
     for i in range(8):
