@@ -13,7 +13,7 @@ from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
 
 
-#Starting from Bay Exit Pointing East
+#Starting from Bay Entrance Pointing East
 def bay_check(unchecked_bays):
     for i in range(1, len(unchecked_bays)):
         if unchecked_bays[i] !=0:
