@@ -22,10 +22,18 @@ from machine import Pin, PWM
 from utime import sleep
 from left_line_sensor import left_sensor
 from go_forward_continuous import go_forward_continuous
-print("Welcome to main.py!")
 from right_line_sensor import right_sensor
-
+from area1_to_lower_junction import area1_to_lj
 from machine import Pin, I2C
+from lower_junction_to_bay_entrance import lj_to_be
+from go_area1 import go_to_area1
+from go_area2 import go_to_area2
+from go_area3 import go_to_area3
+from go_area4 import go_to_area4
+print("Welcome to main.py!")
+
+
+
 i2c = I2C(0, sda=Pin(8), scl=Pin(9))
 print("I2C devices found:", i2c.scan())
 
@@ -50,8 +58,66 @@ while True:
 
 #!!!!!!!!!!!!!!!!!!
 #PUT MAIN PROGRAM IN HERE 
-if latched == True:
+if latched == True:  
+    #Call function to leave starting box and go to bay entrance
+    
+    bay_check()
+    
+    current_qr = current_qr.split()
+
+    if current_qr[0] == 'Rack B' and current_qr[1] == 'Lower':
+        #Go to area 1
+        go_to_area1()
+        #At Checkpoint 1, facing south
+        for i in range(7 - current_qr[2]):
+            go_forward(0.01)
+        turn_right(1)
+
+        #Now at correct bay and Facing towards the bay
+        #Perform crate drop procedure
+        area1_to_lj()
+        lj_to_be()
         
+        
+
+    if current_qr[0] == 'Rack B' and current_qr[1] == 'Upper':
+        go_to_area1()
+        go_forward(0.01)
+        turn_left(1)
+        go_forward(0.01)
+        #At Lower Junction facing west
+        go_to_area2()
+        #At checkpoint 2, facing south
+        for i in range(current_qr[2]):
+            go_forward(0.01)
+        turn_left(1)
+        #Now at Correct bay, facing into bay
+        #Perform crate drop procedure
+
+    if current_qr[0] == 'Rack A' and current_qr[1] == 'Upper':
+        #Go to area 3
+
+        #At checkpoint 3, facing South
+        for i in range(7 - current_qr[2]):
+            go_forward(0.01)
+        turn_right(1)
+        #Now at correct bay, facing into bay
+        #Perform crate drop procedure
+
+    if current_qr[0] == 'Rack A' and current_qr[1] == 'Lower':
+        #Go to area 4
+
+        #At checkpoint 4, facing south
+        for i in range(current_qr[2]):
+            go_forward(0.01)
+        turn_left(1)
+
+        #Now at correct bay, facing into bay
+        #Perform crate drop procedure
+
+    
+        
+    
     
 
 ##PUT PROGRAM HERE WHILST BUTTON IS NOT INSTALLED
