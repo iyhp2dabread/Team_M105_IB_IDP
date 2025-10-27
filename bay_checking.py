@@ -43,7 +43,9 @@ def bay_check(unchecked_bays):
         else:
             go_forward(1)
         
-                
+    turn_left(1)
+
+#Finishes at bay Exit facing north
             
     
     
