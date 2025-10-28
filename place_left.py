@@ -4,7 +4,7 @@ from utime import sleep
 
 from turn_left import turn_left #Turns left by 90 deg
 from turn_right import turn_right #Turns right by 90 deg
-from go_forward_continous import go_forward #Increments forward
+from go_forward_continuous import go_forward #Increments forward
 from drop_crate import drop_crate #Moves forward, drops crate, returns back
 from left_line_sensor import left_sensor #Checks the left sensor
 
