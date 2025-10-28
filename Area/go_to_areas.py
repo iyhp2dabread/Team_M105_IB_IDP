@@ -7,7 +7,7 @@ from forward_right_line_sensor import forward_right_sensor
 from machine import Pin, PWM
 from utime import sleep
 from left_line_sensor import left_sensor
-from go_forward_continuous import go_forward_continuous
+from go_forward_continuous import go_forward
 from right_line_sensor import right_sensor
 
 def go_area1_v2:
