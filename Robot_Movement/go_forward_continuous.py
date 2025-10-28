@@ -34,7 +34,11 @@ def go_forward_continuous(t):
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
     print("Go forward continuous active")
-    
+
+    #Give a little push off the line
+    motor3.Forward()
+    motor4.Forward()
+    sleep(0.5)
     while True:
         
         #Emergency stop
