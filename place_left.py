@@ -33,10 +33,10 @@ def place_left(index):
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
     turn_left(2) # rotates 180 deg
-    go_forward_continous(0.1) # get off checkpoint part
+    go_forward_continous(0.01) # get off checkpoint part
     counter = 0
     while counter < index:
-        go_forward_continous(0.1)
+        go_forward_continous(0.01)
         left_sense = left_sensor() #count lines to find correct bay
         if left_sense == 1:
             counter += 1
