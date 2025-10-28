@@ -4,7 +4,7 @@ from utime import sleep
 
 from turn_left import turn_left #Turns left by 90 deg
 from turn_right import turn_right #Turns right by 90 deg
-from go_forward import go_forward #Increments forward
+from go_forward_continous import go_forward_continous #Increments forward
 from drop_crate import drop_crate #Moves forward, drops crate, returns back
 from right_line_sensor import right_sensor #Check lines to the right
 
@@ -33,17 +33,16 @@ def place_right(index):
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
     turn_left(2)# rotates 180 deg
-    go_forward(0.1) # get off checkpoint part
+    go_forward_continous(0.01) # get off checkpoint part
     counter = 0
-    while counter < index:
-        go_forward(0.1)
+    while counter < (7-index):
+        go_forward_continous(0.01)
         right_sense = right_sensor() #count lines to find correct bay
         if right_sense == 1:
             counter += 1
     
-    turn_right(1) #turn into bay
+    turn_right(1.1) #turn into bay
     drop_crate()
     
     motor3.off() #turns motor 3 off
     motor4.off() #turns motor 4 off
-
