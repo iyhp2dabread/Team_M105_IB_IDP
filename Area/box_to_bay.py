@@ -15,17 +15,20 @@ print("Welcome to main.py!")
 def box_to_bay():
     #assuming we are on the start box right side facing east
     turn_left(1.1)
-    go_forward_continous(2)
+    go_forward_continous(0.01)
     turn_left(1.1)
-    go_forward_continous(1)
+    go_forward_continous(0.01)
     turn_right(1.1)
-    go_forward_continous(2)
+    go_forward_continous(0.01)
     #we are now out of the box and on the bay line
     
     turn_left(1)
-    go_forward(5)
-    go_forward(5)
+    go_forward_continous(0.01)
+    go_forward_continous(0.01)
     #Now at bay entrance
     
     turn_right(2.2)
     #should be facing east
+    
+
+
