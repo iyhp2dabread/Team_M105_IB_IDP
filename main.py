@@ -30,6 +30,10 @@ from go_area1 import go_to_area1
 from go_area2 import go_to_area2
 from go_area3 import go_to_area3
 from go_area4 import go_to_area4
+from go_to_areas import go_area1_v2
+from go_to_areas import go_area2_v2
+from go_to_areas import go_area3_v2
+from go_to_areas import go_area4_v2
 print("Welcome to main.py!")
 
 
@@ -46,7 +50,7 @@ prev_state = 0  # previous button reading
 while True:
     current = button.value()
 
-     Detect rising edge (0 -> 1)
+     #Detect rising edge (0 -> 1)
     if current == 1 and prev_state == 0:
         latched = not latched  # toggle the latch
         led.value(latched)     # update output
@@ -62,14 +66,14 @@ if latched == True:
     #Call function to leave starting box and go to bay entrance
     
     bay_check()
-    
+    current_qr = ' '
     current_qr = current_qr.split()
 
     if current_qr[0] == 'Rack B' and current_qr[1] == 'Lower':
         #Go to area 1
-        go_to_area1()
+        go_area1_v2()
         #At Checkpoint 1, facing south
-        for i in range(7 - current_qr[2]):
+        for i in range(7 - int(current_qr[2])):
             go_forward(0.01)
         turn_right(1)
 
@@ -81,14 +85,9 @@ if latched == True:
         
 
     if current_qr[0] == 'Rack B' and current_qr[1] == 'Upper':
-        go_to_area1()
-        go_forward(0.01)
-        turn_left(1)
-        go_forward(0.01)
-        #At Lower Junction facing west
-        go_to_area2()
-        #At checkpoint 2, facing south
-        for i in range(current_qr[2]):
+        go_area2_v2()
+        #At Area 2 facing onto racks
+        for i in range(int(current_qr[2])):
             go_forward(0.01)
         turn_left(1)
         #Now at Correct bay, facing into bay
@@ -96,9 +95,10 @@ if latched == True:
 
     if current_qr[0] == 'Rack A' and current_qr[1] == 'Upper':
         #Go to area 3
-
+        go_area3_v2()
+        #At Checkpoint facing onto racks (south)
         #At checkpoint 3, facing South
-        for i in range(7 - current_qr[2]):
+        for i in range(7 - int(current_qr[2])):
             go_forward(0.01)
         turn_right(1)
         #Now at correct bay, facing into bay
@@ -106,9 +106,9 @@ if latched == True:
 
     if current_qr[0] == 'Rack A' and current_qr[1] == 'Lower':
         #Go to area 4
-
+        go_area4_v2()
         #At checkpoint 4, facing south
-        for i in range(current_qr[2]):
+        for i in range(int(current_qr[2])):
             go_forward(0.01)
         turn_left(1)
 
