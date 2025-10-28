@@ -12,11 +12,7 @@ def amber_led(): #turns amber LED on
 
     print("Amber LED ON")
     led_red.value(0)
-    while True: #flashing sequence but can change later
-        led_amber.value(1)
-        sleep(0.5)
-        led_amber.value(0)
-        sleep(0.5)
+    led_amber.value(1)
 
 if __name__ == "__main__":
     amber_led()
