@@ -14,28 +14,18 @@ def area2_to_lj():
     turn_right(1)
     right_sense = 0
     while right_sense != 1:
-        go_forward(0.1)
+        go_forward(0.01)
         right_sense = right_sensor()
     #on the middle right corner
     
     turn_right(1)
-    go_forward(0.2)
-    right_sense = 0
-    while right_sense != 1:
-        go_forward(0.1)
-        right_sense = right_sensor()
+    go_forward(0.01)
     #on the upper junction
         
     turn_right(1)
-    go_forward(0.2)
-    left_sense = 0
-    right_sense = 0
-    while left_sense != 1 and right_sense != 1:
-        go_forward(0.2)
-        left_sense = left_sensor()
-        right_sense = right_sensor()
+    go_forward(0.01)
     #on lower junction
     turn_left(1)
     
-    lower_junction_to_bay_entrance() 
+   # lower_junction_to_bay_entrance() 
 
