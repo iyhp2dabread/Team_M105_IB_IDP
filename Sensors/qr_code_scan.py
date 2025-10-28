@@ -1,8 +1,8 @@
 #scans the qr_code and returns the information
 from time import sleep
 from machine import Pin, I2C
-from red_led import red_led_on
-from amber_led import amber_led_on
+from red_led import red_led
+from amber_led import amber_led
 
 from libs.tiny_code_reader.tiny_code_reader import TinyCodeReader
 
@@ -32,7 +32,7 @@ def scan_qr():
     tiny_code_reader = TinyCodeReader(i2c_bus)
 
     print("Polling!")
-    red_led_on()
+    red_led()
 
     # Keep looping and reading the sensor - a real application may do this in
     # a separate thread or a few times when it expects to find a QR code
@@ -46,7 +46,7 @@ def scan_qr():
             print(area, code[2])
             return area, code[2]
 
-    amber_led_on()
+    amber_led()
 
 if __name__ == "__main__":
     scan_qr()
