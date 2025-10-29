@@ -51,6 +51,7 @@ def pickup_box():
     sleep(5)
     actuator1.set(dir = 0, speed = 50)
     sleep(4.5)
+    actuator1.set(dir=0, speed = 0)
     
     #move forward till we get to the box
     while distance_sensor() > 30:
@@ -62,3 +63,4 @@ def pickup_box():
     #actually picking up the box
     actautor1.set(dir = 1, speed = 50)
     sleep(5)
+    actuator1.set(dir = 1,speed = 0)
