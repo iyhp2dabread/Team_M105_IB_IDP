@@ -1,8 +1,6 @@
 #scans the qr_code and returns the information
 from time import sleep
 from machine import Pin, I2C
-from red_led import red_led
-from amber_led import amber_led
 
 from libs.tiny_code_reader.tiny_code_reader import TinyCodeReader
 
@@ -18,8 +16,10 @@ def area_code(Rack, Level):
 
 def scan_qr():
     print("Starting tiny code reader...")
+
+    # enabling power to tiny code reader and turning red LED on (same output pin controls both)
     tiny_code_switch = Pin(8, Pin.Out) 
-    tiny_code_switch.value(1) # enabling power to tiny code reader and turning red LED on
+    tiny_code_switch.value(1) 
 
     # Set up for the Pico, pin numbers will vary across boards.
     i2c_bus = I2C(id=0, scl=Pin(17), sda=Pin(16), freq=400000) # I2C0 on GP16 & GP17
@@ -34,7 +34,6 @@ def scan_qr():
     tiny_code_reader = TinyCodeReader(i2c_bus)
 
     print("Polling!")
-    red_led()
 
     # Keep looping and reading the sensor - a real application may do this in
     # a separate thread or a few times when it expects to find a QR code
