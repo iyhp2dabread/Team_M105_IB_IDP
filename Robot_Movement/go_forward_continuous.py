@@ -29,7 +29,7 @@ class Motor:
         self.pwm.duty_u16(int(65535 * speed / 100))
 
 
-def go_forward_continuous(t):
+def go_forward(t):
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
