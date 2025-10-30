@@ -7,7 +7,7 @@ def red_led(): #turns red LED on
     led_amber = Pin(led_amber_pin, Pin.OUT)
     
     #Red LED
-    led_red_pin = 22  # Pin 22 = GP22 (labelled 29 on the jumper)
+    led_red_pin = 8  # Pin 8 = GP8 (labelled 11 on the jumper)
     led_red = Pin(led_red_pin, Pin.OUT)
 
     print("Red LED ON")
