@@ -50,7 +50,5 @@ def scan_qr():
 
     tiny_code_switch.value(0) # power off
     
-    amber_led()
-
 if __name__ == "__main__":
     scan_qr()
