@@ -18,6 +18,8 @@ def area_code(Rack, Level):
 
 def scan_qr():
     print("Starting tiny code reader...")
+    tiny_code_switch = Pin(8, Pin.Out) 
+    tiny_code_switch.value(1) # enabling power to tiny code reader and turning red LED on
 
     # Set up for the Pico, pin numbers will vary across boards.
     i2c_bus = I2C(id=0, scl=Pin(17), sda=Pin(16), freq=400000) # I2C0 on GP16 & GP17
@@ -46,6 +48,8 @@ def scan_qr():
             print(area, code[2])
             return area, code[2]
 
+    tiny_code_switch.value(0) # power off
+    
     amber_led()
 
 if __name__ == "__main__":
