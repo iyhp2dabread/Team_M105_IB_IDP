@@ -1,6 +1,7 @@
 #scans the qr_code and returns the information
 from time import sleep
 from machine import Pin, I2C
+from tiny_code_red_led_switch import tiny_code_red_led_switch_on, tiny_code_red_led_switch_off
 
 from libs.tiny_code_reader.tiny_code_reader import TinyCodeReader
 
@@ -18,8 +19,7 @@ def scan_qr():
     print("Starting tiny code reader...")
 
     # enabling power to tiny code reader and turning red LED on (same output pin controls both)
-    tiny_code_switch = Pin(8, Pin.Out) 
-    tiny_code_switch.value(1) 
+    tiny_code_red_led_switch_on()
 
     # Set up for the Pico, pin numbers will vary across boards.
     i2c_bus = I2C(id=0, scl=Pin(17), sda=Pin(16), freq=400000) # I2C0 on GP16 & GP17
@@ -47,7 +47,7 @@ def scan_qr():
             print(area, code[2])
             return area, code[2]
 
-    tiny_code_switch.value(0) # power off
+    tiny_code_red_led_switch_off()
     
 if __name__ == "__main__":
     scan_qr()
