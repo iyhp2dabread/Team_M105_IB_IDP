@@ -10,7 +10,7 @@ sensor_right = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
 def right_sensor():
     print("Sequence Right Active")
     while True:
-      sleep(0.1)
+      sleep(0.01)
       return sensor_right.value()
 
 if __name__ == "__main__":
