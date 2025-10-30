@@ -44,6 +44,8 @@ def start_area_forward(t):
         #On the edge
         if left_sensor() == 1 or right_sensor() == 1:
             print("Start Box edge reached")
+            AmberLED = Pin(28, Pin.Out) 
+            AmberLED.value(1) # start amber LED flashing once start box edge reached
             motor3.off()
             motor4.off()
             break
