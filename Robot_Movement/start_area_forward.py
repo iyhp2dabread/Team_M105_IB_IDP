@@ -30,12 +30,14 @@ class Motor:
         self.pwm.duty_u16(int(65535 * speed / 100))
 
 
+
+#POSITION FACING EAST ON START
 def start_area_forward(t):
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
     print("Start up go forward")
-    
+    turn_right(1)
     while True:
         #Emergency stop
         if emergency_stop(60) == 1:
@@ -56,3 +58,19 @@ def start_area_forward(t):
             motor4.Forward()
             
         sleep(t)
+    
+    #Should now be on right line 
+    #Follow line round to bay entrance
+    turn_left(1)
+    go_forward(0.01)
+    turn_left(1)
+    go_forward(0.01)
+    turn_right(1)
+    go_forward(0.01)
+    turn_left(1)
+    go_forward(0.01)
+    go_forward(0.01)
+    turn_left(1)
+    turn_left(1)
+
+    # On bay entrance facing East
