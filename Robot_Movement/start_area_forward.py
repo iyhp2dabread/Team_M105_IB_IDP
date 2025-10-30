@@ -9,6 +9,7 @@ from stop import stop
 from emergency_stop import emergency_stop
 from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
+from amber_led import amber_led_on, amber_led_off
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
@@ -44,8 +45,7 @@ def start_area_forward(t):
         #On the edge
         if left_sensor() == 1 or right_sensor() == 1:
             print("Start Box edge reached")
-            AmberLED = Pin(28, Pin.Out) 
-            AmberLED.value(1) # start amber LED flashing once start box edge reached
+            amber_led_on() # start amber LED flashing once start box edge reached
             motor3.off()
             motor4.off()
             break
