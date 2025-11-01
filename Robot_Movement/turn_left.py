@@ -34,6 +34,7 @@ def turn_left(0.01):
         motor3.Reverse()
         motor4.Forward()
         sleep(0.01)
+        fr = forward_right_sensor()
     
     motor3.off() #Stops Motor 3
     motor4.off() #Stops Motor 4
