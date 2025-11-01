@@ -1,6 +1,8 @@
 #Turns right, using motors.
 from machine import Pin, PWM
 from utime import sleep
+from forward_left_line_sensor import forward_left_sensor
+
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
@@ -21,14 +23,17 @@ class Motor:
         self.pwm.duty_u16(int(65535 * speed / 100))
 
 
-def turn_right(t):
+def turn_right():
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
     print("Turning Right")
-    motor3.Forward()
-    motor4.Reverse()
-    sleep(t)
+    fl = forward_left_sensor()
+    while fl != 1:
+        motor3.Forward()
+        motor4.Reverse()
+        sleep(0.01)
+        fl = forward_left_sensor()
     
     motor3.off() #Stops Motor 3
     motor4.off() #Stops Motor 4
