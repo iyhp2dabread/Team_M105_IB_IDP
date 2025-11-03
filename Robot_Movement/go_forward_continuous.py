@@ -6,9 +6,14 @@ from forward_right_line_sensor import forward_right_sensor
 from turn_left import turn_left
 from turn_right import turn_right
 from stop import stop
-from emergency_stop import emergency_stop
+#from emergency_stop import emergency_stop
 from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
+from forward_left_line_sensor import forward_left_sensor
+from forward_right_line_sensor import forward_right_sensor
+from left_line_sensor import left_sensor
+from right_line_sensor import right_sensor
+button = Pin(12, Pin.IN, Pin.PULL_DOWN)  
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
@@ -20,7 +25,7 @@ class Motor:
     def off(self):
         self.pwm.duty_u16(0)
         
-    def Forward(self, speed=50):
+    def Forward(self, speed=80):
         self.mDir.value(0)                     # forward = 0 reverse = 1 motor
         self.pwm.duty_u16(int(65535 * speed / 100))  # speed range 0-100 motor
 
@@ -36,38 +41,92 @@ def go_forward(t):
     print("Go forward continuous active")
 
     #Give a little push off the line
-    motor3.Forward()
-    motor4.Forward()
-    sleep(0.5)
+    motor3.Forward(speed = 60)
+    motor4.Forward(speed = 40)
+    sleep(0.1)
     while True:
-        
+        ls = left_sensor()
+        rs = right_sensor()
+        fl = forward_left_sensor()
+        fr = forward_right_sensor()
         #Emergency stop
-        if emergency_stop(60) == 1:
-            stop()
-            break
+     #   if emergency_stop(60) == 1:
+      #      stop()
+       #     break
         
         #Robot lost the line
-        if forward_left_sensor() == 0 and forward_right_sensor() == 0:
+        if ls == 1 or rs == 1:
+            print("Junction/Turn reached, stopping")
             stop()
             break
+        if fl == 0 and fr == 0:
+            stop()
+            sleep(0.1)
+            found = False
+             # Try turning right slowly
+            for _ in range(5):
+                motor3.Forward(70)
+                motor4.Reverse(70)
+                sleep(0.05)
+                if fl == 1 or fr == 1:
+                    print("Line reacquired (right spin)!")
+                    found = True
+                    break
+            stop()
+            sleep(1)
+            
+            # If not found, try turning left slowly
+            if not found:
+                for _ in range(10):  # a bit longer sweep the other way
+                    motor3.Reverse(70)
+                    motor4.Forward(70)
+                    sleep(0.05)
+                    if fl == 1 or fr == 1:
+                        print("Line reacquired (left spin)!")
+                        found = True
+                        break
+                stop()
+                sleep(1)
+                
+            if not found:
+                print("Line not found after scanning — stopping.")
+                stop()
+                break  # end loop safely
+
+            # Resume forward motion after reacquiring
+            continue
+            break
         
-        if left_sensor() == 1 or right_sensor() == 1:
+        elif ls == 1 or rs == 1:
             print("Junction/Turn reached, stopping")
+            stop()
             break
         
         #Small corrections to stay on line
-        elif forward_left_sensor() == 1 and forward_right_sensor() == 0:
-            motor3.off()
-            motor4.Forward()
-        elif forward_left_sensor() == 0 and forward_right_sensor() == 1:
-            motor4.off()
-            motor3.Forward()
+        elif fl == 1 and fr == 0:
+            motor3.Forward(speed = 60)
+            motor4.Forward(speed = 60)
+        elif fl == 0 and fr == 1:
+            motor4.Forward(speed = 60)
+            motor3.Forward(speed = 80)
             
         #Fully on line
         else:
-            motor3.Forward()
-            motor4.Forward()
+            motor3.Forward(speed = 90)
+            motor4.Forward(speed = 70)
+        
         sleep(t)
+        current = button.value()
+
+         #Detect rising edge (0 -> 1)
+      #  if current == 1 and prev_state == 0:
+       #     latched = not latched  # toggle the latch
+        #    led.value(latched)     # update output
+         #   print("Button toggled. Latched =", latched)
+
+        #prev_state = current  # store for next loop
     
 
+if __name__ == "__main__":
+    go_forward(0.001)
 
