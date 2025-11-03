@@ -6,10 +6,10 @@ from forward_right_line_sensor import forward_right_sensor
 from turn_left import turn_left
 from turn_right import turn_right
 from stop import stop
-from emergency_stop import emergency_stop
+#from emergency_stop import emergency_stop
 from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
-from amber_led import amber_led_on, amber_led_off
+from amber_led import amber_led_on
 
 class Motor:
     def __init__(self, dirPin, PWMPin):
@@ -29,48 +29,52 @@ class Motor:
         self.mDir.value(1)
         self.pwm.duty_u16(int(65535 * speed / 100))
 
+#Button to start program
+button = Pin(12, Pin.IN, Pin.PULL_DOWN)  
+led = Pin(15, Pin.OUT)
+latched = False
+prev_state = 0  # previous button reading
+while True:
+    current = button.value()
 
+     #Detect rising edge (0 -> 1)
+    if current == 1 and prev_state == 0:
+        latched = not latched  # toggle the latch
+        led.value(latched)     # update output
+        print("Button toggled. Latched =", latched)
+        break
 
-#POSITION FACING EAST ON START
+    prev_state = current  # store for next loop
+    sleep(0.05)  # 50 ms debounce delay
+
 def start_area_forward(t):
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     
     print("Start up go forward")
-    turn_right(1)
+    amber_led_on()
     while True:
         #Emergency stop
-        if emergency_stop(60) == 1:
-            stop()
-            break
+        #if emergency_stop(60) == 1:
+            #stop()
+            #break
         
         #On the edge
         if left_sensor() == 1 or right_sensor() == 1:
-            print("Start Box edge reached")
-            amber_led_on() # start amber LED flashing once start box edge reached
+            sleep(0.2)
             motor3.off()
             motor4.off()
+            stop()
             break
         
         #In the dark region
         else:
-            motor3.Forward()
-            motor4.Forward()
+            motor3.Forward(speed = 90)
+            motor4.Forward(speed = 70)
             
         sleep(t)
-    
-    #Should now be on right line 
-    #Follow line round to bay entrance
-    turn_left(1)
-    go_forward(0.01)
-    turn_left(1)
-    go_forward(0.01)
-    turn_right(1)
-    go_forward(0.01)
-    turn_left(1)
-    go_forward(0.01)
-    go_forward(0.01)
-    turn_left(1)
-    turn_left(1)
-
-    # On bay entrance facing East
+while True:
+    #stop()
+    if latched == True:
+        start_area_forward(0.01)
+        break
