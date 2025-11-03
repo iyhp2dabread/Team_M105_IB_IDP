@@ -1,8 +1,8 @@
 #scans the qr_code and returns the information
 from time import sleep
 from machine import Pin, I2C
-from tiny_code_red_led_switch import tiny_code_red_led_switch_on, tiny_code_red_led_switch_off
-
+from tiny_code_red_led_switch import tiny_code_red_led_switch_on
+from tiny_code_red_led_switch import tiny_code_red_led_switch_off
 from libs.tiny_code_reader.tiny_code_reader import TinyCodeReader
 
 def area_code(Rack, Level):
@@ -42,10 +42,8 @@ def scan_qr():
 
         code = tiny_code_reader.poll()
         if code is not None:
-            area = area_code(code[0], code[1])
             print(f"Code found: {code}")
-            print(area, code[2])
-            return area, code[2]
+            break
 
     tiny_code_red_led_switch_off()
     
