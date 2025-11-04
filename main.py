@@ -25,11 +25,6 @@ from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
 #from area1_to_lower_junction import area1_to_lj
 from machine import Pin, I2C
-#from lower_junction_to_bay_entrance import lj_to_be
-#from go_area1 import go_to_area1
-#from go_area2 import go_to_area2
-#from go_area3 import go_to_area3
-#from go_area4 import go_to_area4
 from go_to_areas import go_area1_v2
 from go_to_areas import go_area2_v2
 from go_to_areas import go_area3_v2
@@ -41,7 +36,6 @@ from amber_led import amber_led_on
 from amber_led import amber_led_off
 #from bay_checking import bay_check
 print("Welcome to main.py!")
-amber_led_off()
 
 i2c = I2C(0, sda=Pin(8), scl=Pin(9))
 print("I2C devices found:", i2c.scan())
@@ -78,13 +72,19 @@ ON = False
 #PUT MAIN PROGRAM IN HERE 
 if latched == True:
     amber_led_off()
+    start_area_forward(0.1)
     go_forward(0.001)
     sleep(1)
     turn_left()
     sleep(1)
     go_forward(0.001)
-    
+    go_forward(0.001)
+    turn_left()
+    turn_left()
+    #on bay entrance facing east
     sleep(5)
+    break
+    """
     #Call function to leave starting box and go to bay entrance
     print("We are go")
     #bay_check()
@@ -175,5 +175,5 @@ motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1,
 motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
 
 stop()
-  
+"""
 print("main.py Done!")
