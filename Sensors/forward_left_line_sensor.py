@@ -8,9 +8,10 @@ sensor_forward_left = Pin(sensor_pin, Pin.IN, Pin.PULL_DOWN)
 
 #Continiously update the sensor value and print said value
 def forward_left_sensor():
-    print("Sequence Forward Left Active")
+ #   print("Sequence Forward Left Active")
     while True:
       sleep(0.01)
+      print(sensor_forward_left.value())
       return sensor_forward_left.value()
 
 if __name__ == "__main__":
