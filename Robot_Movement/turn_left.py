@@ -3,6 +3,7 @@ from machine import Pin, PWM
 from utime import sleep
 from forward_left_line_sensor import forward_left_sensor
 from forward_right_line_sensor import forward_right_sensor
+from go_forward_continuous import go_forward
 from stop import stop
 
 class Motor:
@@ -28,6 +29,9 @@ def turn_left():
     motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
     motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
     fr = forward_right_sensor()
+    go_forward(0.01)
+    sleep(0.2)
+    stop()
     print("Turning Left")
     while fr != 1:
         motor3.Reverse()
