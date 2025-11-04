@@ -42,7 +42,9 @@ def scan_qr():
 
         code = tiny_code_reader.poll()
         if code is not None:
+            rack, level, index = code.split(", ")
             print(f"Code found: {code}")
+            print(area_code(rack,level), index)
             break
 
     tiny_code_red_led_switch_off()
