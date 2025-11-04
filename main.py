@@ -31,6 +31,7 @@ from go_to_areas import go_area3_v2
 from go_to_areas import go_area4_v2
 from start_area_forward import start_area_forward
 from stop import stop
+from go_to_bay_entrance import go_bay_entrance 
 
 from amber_led import amber_led_on
 from amber_led import amber_led_off
@@ -40,6 +41,26 @@ print("Welcome to main.py!")
 i2c = I2C(0, sda=Pin(8), scl=Pin(9))
 print("I2C devices found:", i2c.scan())
 
+class Motor:
+    def __init__(self, dirPin, PWMPin):
+        self.mDir = Pin(dirPin, Pin.OUT)  # set motor direction pin
+        self.pwm = PWM(Pin(PWMPin))  # set motor pwm pin
+        self.pwm.freq(1000)  # set PWM frequency
+        self.pwm.duty_u16(0)  # set duty cycle - 0=off
+        
+    def off(self):
+        self.pwm.duty_u16(0)
+        
+    def Forward(self, speed=60):
+        self.mDir.value(0)                     # forward = 0 reverse = 1 motor
+        self.pwm.duty_u16(int(65535 * speed / 100))  # speed range 0-100 motor
+
+    def Reverse(self, speed=60):
+        self.mDir.value(1)
+        self.pwm.duty_u16(int(65535 * speed / 100))
+
+motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
+motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
 
 #Button to start program
 button = Pin(12, Pin.IN, Pin.PULL_DOWN)  
@@ -71,19 +92,24 @@ ON = False
 #!!!!!!!!!!!!!!!!!!
 #PUT MAIN PROGRAM IN HERE 
 if latched == True:
+    print("GO")
     amber_led_off()
-    start_area_forward(0.1)
-    go_forward(0.001)
+    
+    start_area_forward(0.01)
+    """go_forward(0.001)
     sleep(1)
     turn_left()
     sleep(1)
-    go_forward(0.001)
-    go_forward(0.001)
-    turn_left()
-    turn_left()
+    start_area_forward(0.01)
+    print("hello") 
+    turn_right()
+    motor3.Forward()
+    motor4.Forward()
+    sleep(2)
+    turn_right()
+    go_bay_entrance()
     #on bay entrance facing east
     sleep(5)
-    break
     """
     #Call function to leave starting box and go to bay entrance
     print("We are go")
@@ -175,5 +201,5 @@ motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1,
 motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
 
 stop()
-"""
+
 print("main.py Done!")
