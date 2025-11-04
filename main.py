@@ -41,6 +41,7 @@ from amber_led import amber_led_on
 from amber_led import amber_led_off
 #from bay_checking import bay_check
 print("Welcome to main.py!")
+amber_led_off()
 
 i2c = I2C(0, sda=Pin(8), scl=Pin(9))
 print("I2C devices found:", i2c.scan())
