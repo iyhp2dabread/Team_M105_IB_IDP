@@ -4,13 +4,13 @@ from utime import sleep
 from turn_left import turn_left #Turns left by 90 deg
 from turn_right import turn_right #Turns right by 90 deg
 from go_forward import go_forward #Increments forward
-from qr_code_scanner import scan_qr #scans the qr codes
 from crate_extraction import extract_crate #extracts crate if it exists
 from amber_led import amber_led #flashes the amber led
 from drop_crate import drop_crate 
 #from pickup_crate_sequence.py import pickup_crate
 from left_line_sensor import left_sensor
 from right_line_sensor import right_sensor
+from qr_code_scan import scan_qr
 
 
 #Starting from Bay Entrance Pointing East
@@ -23,7 +23,7 @@ def bay_check(unchecked_bays):
             turn_right(1)
             go_forward(1)
             scan_qr_crate = scan_qr()
-            if scan_qr_crate[0] == 1:
+            if scan_qr_crate == True:
                 print("Crate is found")
                 amber_led()
                 #pickup_crate()
@@ -46,7 +46,10 @@ def bay_check(unchecked_bays):
     turn_left(1)
 
 #Finishes at bay Exit facing north
-            
+
+if __name__ == "__main__":
+    unchecked_bays = [1, 1, 1, 1]
+    bay_check()
     
     
     
