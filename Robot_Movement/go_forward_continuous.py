@@ -105,7 +105,7 @@ def go_forward(t):
         #Small corrections to stay on line
         elif fl == 1 and fr == 0:
             motor3.Forward(speed = 60)
-            motor4.Forward(speed = 60)
+            motor4.Forward(speed = 65)
         elif fl == 0 and fr == 1:
             motor4.Forward(speed = 60)
             motor3.Forward(speed = 80)
