@@ -12,7 +12,8 @@
 #from test_STU_22L_UART import test_STU_22L_UART
 #from test_tiny_code_reader import test_tiny_code_reader
 #from simple_go_forward import go_forward
-from go_forward_new import go_forward
+#from go_forward_new import go_forward
+from go_forward_continuous import go_forward
 from stop import stop
 from turn_left import turn_left
 from turn_right import turn_right
@@ -21,22 +22,25 @@ from forward_right_line_sensor import forward_right_sensor
 from machine import Pin, PWM
 from utime import sleep
 from left_line_sensor import left_sensor
-from go_forward_continuous import go_forward_continuous
 from right_line_sensor import right_sensor
-from area1_to_lower_junction import area1_to_lj
+#from area1_to_lower_junction import area1_to_lj
 from machine import Pin, I2C
-from lower_junction_to_bay_entrance import lj_to_be
-from go_area1 import go_to_area1
-from go_area2 import go_to_area2
-from go_area3 import go_to_area3
-from go_area4 import go_to_area4
+#from lower_junction_to_bay_entrance import lj_to_be
+#from go_area1 import go_to_area1
+#from go_area2 import go_to_area2
+#from go_area3 import go_to_area3
+#from go_area4 import go_to_area4
 from go_to_areas import go_area1_v2
 from go_to_areas import go_area2_v2
 from go_to_areas import go_area3_v2
 from go_to_areas import go_area4_v2
+from start_area_forward import start_area_forward
+from stop import stop
+
+from amber_led import amber_led_on
+from amber_led import amber_led_off
+#from bay_checking import bay_check
 print("Welcome to main.py!")
-
-
 
 i2c = I2C(0, sda=Pin(8), scl=Pin(9))
 print("I2C devices found:", i2c.scan())
@@ -60,27 +64,50 @@ while True:
     prev_state = current  # store for next loop
     sleep(0.05)  # 50 ms debounce delay
 
+
+test_sensors = False
+while test_sensors == True:
+    print(left_sensor(), forward_left_sensor(), forward_right_sensor(), right_sensor() )
+    sleep(1)
+
+
+ 
+ON = False
 #!!!!!!!!!!!!!!!!!!
 #PUT MAIN PROGRAM IN HERE 
-if latched == True:  
-    #Call function to leave starting box and go to bay entrance
+if latched == True:
+    amber_led_off()
+    go_forward(0.001)
+    sleep(1)
+    turn_left()
+    sleep(1)
+    go_forward(0.001)
     
-    bay_check()
-    current_qr = ' '
-    current_qr = current_qr.split()
+    sleep(5)
+    #Call function to leave starting box and go to bay entrance
+    print("We are go")
+    #bay_check()
+    #current_qr = "Rack B, Lower, 6"
+    #current_qr = current_qr.split()
+    
+    current_qr = ['Rack B', 'Lower', 1]
 
     if current_qr[0] == 'Rack B' and current_qr[1] == 'Lower':
         #Go to area 1
         go_area1_v2()
+        
+        sleep(5)
+        turn_left(2)
+        turn_left(2)
         #At Checkpoint 1, facing south
-        for i in range(7 - int(current_qr[2])):
-            go_forward(0.01)
-        turn_right(1)
+        #for i in range(7 - int(current_qr[2])):
+         #   go_forward(0.01)
+        #turn_right(1)
 
         #Now at correct bay and Facing towards the bay
         #Perform crate drop procedure
-        area1_to_lj()
-        lj_to_be()
+        #area1_to_lj()
+        #lj_to_be()
         
         
 
@@ -114,6 +141,8 @@ if latched == True:
 
         #Now at correct bay, facing into bay
         #Perform crate drop procedure
+else:
+    stop()
 
     
         
@@ -144,19 +173,6 @@ class Motor:
 motor3 = Motor(dirPin=4, PWMPin=5)  # Motor 3 is controlled from Motor Driv2 #1, which is on GP4/5
 motor4 = Motor(dirPin=7, PWMPin=6)  # Motor 4 is controlled from Motor Driv2 #2, which is on GP6/7
 
-
-go_forward_continuous(0.01)
-
-
-
-
 stop()
   
 print("main.py Done!")
-
-
-
-
-
-
-
