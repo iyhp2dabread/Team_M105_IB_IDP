@@ -41,15 +41,17 @@ def go_forward(t):
     print("Go forward continuous active")
 
     #Give a little push off the line
-    motor3.Forward(speed = 60)
-    motor4.Forward(speed = 40)
-    sleep(0.1)
+    motor3.Forward(speed = 70)
+    motor4.Forward(speed = 80)
+    sleep(0.2)
     while True:
         ls = left_sensor()
         rs = right_sensor()
         fl = forward_left_sensor()
         fr = forward_right_sensor()
-        #Emergency stop
+        print("ls:", ls, " fl:", fl, " fr:", fr, " rs:", rs)
+       
+       #Emergency stop
      #   if emergency_stop(60) == 1:
       #      stop()
        #     break
@@ -65,6 +67,8 @@ def go_forward(t):
             found = False
              # Try turning right slowly
             for _ in range(5):
+                fl = forward_left_sensor()
+                fr = forward_right_sensor()
                 motor3.Forward(70)
                 motor4.Reverse(70)
                 sleep(0.05)
@@ -78,6 +82,8 @@ def go_forward(t):
             # If not found, try turning left slowly
             if not found:
                 for _ in range(10):  # a bit longer sweep the other way
+                    fl = forward_left_sensor()
+                    fr = forward_right_sensor()
                     motor3.Reverse(70)
                     motor4.Forward(70)
                     sleep(0.05)
@@ -103,17 +109,17 @@ def go_forward(t):
             break
         
         #Small corrections to stay on line
-        elif fl == 1 and fr == 0:
+        if fl == 1 and fr == 0:
             motor3.Forward(speed = 60)
-            motor4.Forward(speed = 65)
-        elif fl == 0 and fr == 1:
+            motor4.Forward(speed = 80)
+        if fl == 0 and fr == 1:
             motor4.Forward(speed = 60)
-            motor3.Forward(speed = 80)
+            motor3.Forward(speed = 90)
             
         #Fully on line
         else:
-            motor3.Forward(speed = 90)
-            motor4.Forward(speed = 70)
+            motor3.Forward(speed = 72)
+            motor4.Forward(speed = 80)
         
         sleep(t)
         current = button.value()
@@ -128,5 +134,6 @@ def go_forward(t):
     
 
 if __name__ == "__main__":
-    go_forward(0.001)
+    go_forward(0.01)
+    stop()
 
