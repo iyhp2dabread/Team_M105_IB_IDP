@@ -1,3 +1,4 @@
+#OLD CODE NOT IN USE
 #scans the qr_code and returns the information
 from time import sleep
 from machine import Pin, I2C
